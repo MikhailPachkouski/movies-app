@@ -1,0 +1,7 @@
+.navBar {
+	width: 100%;
+			position: fixed;
+			bottom: 0;
+			background-color: '#262726';
+			z-index: 100;
+}

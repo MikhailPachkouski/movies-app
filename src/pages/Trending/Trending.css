@@ -1,0 +1,10 @@
+.trending__title {
+	font-size: 2em;
+	text-align: center;
+}
+
+.trending__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
