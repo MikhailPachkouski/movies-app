@@ -1,14 +1,3 @@
-/* .header {
-	position: fixed;
-	top: 0;
-	
-	padding: 10px;
-	color:aliceblue;
-	background-color: rgb(41, 49, 51);
-	box-shadow: 0 1px 5px #000;
-
-} */
-
 .header__wrapper {
 	display: flex;
   justify-content: center;

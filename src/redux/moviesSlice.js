@@ -19,4 +19,4 @@ const moviesSlice = createSlice({
 })
 
 export default moviesSlice.reducer
-export const {fetchContent} = moviesSlice.actions
+export const {fetchContent, changePage} = moviesSlice.actions

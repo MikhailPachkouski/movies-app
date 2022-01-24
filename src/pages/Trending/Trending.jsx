@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
+import BottomPagination from '../../components/Pagination/BottomPagination';
 import { fetchContent } from '../../redux/moviesSlice';
 import './Trending.css'
 
@@ -19,7 +20,7 @@ const Trending = () => {
 
 	useEffect(() => {
 		fetchTrending();
-	}, []);
+	}, [page]);
 
 	return (
 		<div>
@@ -33,9 +34,11 @@ const Trending = () => {
 							title={el.title}
 							date={el.release_date}
 							media_type={el.media_type}
+							vote={el.vote_average}
 						/>
 					))}
 			</div>
+			<BottomPagination/>
 		</div>
 	);
 };

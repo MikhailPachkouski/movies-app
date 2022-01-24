@@ -15,7 +15,7 @@ function App() {
 		<BrowserRouter>
 			<Header />
 			<div className='App'>
-				<Container maxWidth='md'>
+				<Container maxWidth='lg'>
 					<Routes>
 						<Route path='/' element={<Trending/>} exact />
 						<Route path='/movies' element={<Movies/>} />
