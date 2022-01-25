@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
 import BottomPagination from '../../components/Pagination/BottomPagination';
-import { fetchContent } from '../../redux/moviesSlice';
+import { changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
 import './Trending.css'
 
 const Trending = () => {
@@ -16,6 +16,8 @@ const Trending = () => {
 			`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&language=ru&page=${page}`
 		);
 		dispatch(fetchContent(data.results));
+		dispatch(changeNumberOfPages(data.total_pages))
+
 	};
 
 	useEffect(() => {
@@ -24,7 +26,7 @@ const Trending = () => {
 
 	return (
 		<div>
-			<div className='trending__title'>Trending</div>
+			<div className='trending__title'>Популярное</div>
 			<div className='trending__content'>
 				{content &&
 					content.map(el => (
@@ -35,6 +37,8 @@ const Trending = () => {
 							date={el.release_date}
 							media_type={el.media_type}
 							vote={el.vote_average}
+							name={el.name}
+							tvdate={el.first_air_date}
 						/>
 					))}
 			</div>
