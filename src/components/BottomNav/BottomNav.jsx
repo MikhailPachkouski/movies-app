@@ -7,6 +7,9 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import TvIcon from "@mui/icons-material/Tv";
 import MovieIcon from '@mui/icons-material/Movie';
 import SearchIcon from "@mui/icons-material/Search";
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function SimpleBottomNavigation() {
 	const useStyles = makeStyles({
@@ -26,7 +29,21 @@ export default function SimpleBottomNavigation() {
 
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
+	const navigate = useNavigate()
+
 	// const history = useHistory();
+
+	React.useEffect(() => {
+		if (value === 0) {
+			navigate('/')
+		} else if (value === 1) {
+			navigate('/movies')
+		} else if (value === 2) {
+			navigate('/series')
+		} else if (value === 3) {
+			navigate('/search')
+	}
+ } , [value])
 
 	return (
 		<Box className={classes.wrap}>
