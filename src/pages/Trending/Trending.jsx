@@ -1,15 +1,38 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
 import BottomPagination from '../../components/Pagination/BottomPagination';
-import { changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
+import { changeFavorites, changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
 import './Trending.css'
 
 const Trending = () => {
-	const { content, page } = useSelector(state => state.movies);
+	const { content, page, numberOfPages } = useSelector(state => state.movies);
 	const dispatch = useDispatch();
 	// let trendUrl = `3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
+
+	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
+
+	useEffect(() => {
+		localStorage.setItem('favorites', JSON.stringify(favorites))
+	}, [favorites])
+
+	
+	const handleClick = (movie) => {
+		if (favorites.some(e=> e.id === movie.id)) {
+			setFavorites(favorites?.filter((el) => el?.id !== movie?.id))
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+		} else {
+			setFavorites([...favorites, movie])
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+
+	}}
+	const checkFavorite = (movie) => {
+		if (favorites.some(el => el.id === movie.id)) {
+			return true
+		} else return false
+	}
+
 
 	const fetchTrending = async () => {
 		const { data } = await axios.get(
@@ -17,12 +40,11 @@ const Trending = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
-
+			console.log(content);
 	};
 
 	useEffect(() => {
 		fetchTrending();
-		console.log(content);
 	}, [page]);
 
 	return (
@@ -41,10 +63,12 @@ const Trending = () => {
 							name={el.name}
 							tvdate={el.first_air_date}
 							movie={el}
+							handleClick={handleClick}
+							checkFavorite={checkFavorite}
 						/>
 					))}
 			</div>
-			<BottomPagination/>
+			{numberOfPages>1 && <BottomPagination/>}
 		</div>
 	);
 };

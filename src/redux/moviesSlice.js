@@ -8,7 +8,7 @@ const moviesSlice = createSlice({
 		numberOfPages: 1,
 		genres: [{}],
 		selectedGenres: [],
-		// favorites: [],
+		favorites: JSON.parse(localStorage.getItem('favorites')) || [],
 	},
 	reducers: {
 		fetchContent(state, action) {
@@ -29,6 +29,9 @@ const moviesSlice = createSlice({
 		removeSelectedGenres(state, action) {
 			state.selectedGenres = state.selectedGenres.filter((g) => g.id !== action.payload.id);
 		},
+		changeFavorites(state, action) {
+			state.favorites = [...action.payload]
+		}
 	},
 });
 
@@ -40,4 +43,5 @@ export const {
 	getGenres,
 	addSelectedGenres,
 	removeSelectedGenres,
+	changeFavorites,
 } = moviesSlice.actions;

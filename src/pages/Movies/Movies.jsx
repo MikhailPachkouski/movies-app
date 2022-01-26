@@ -1,16 +1,41 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
 import Genres from '../../components/Genres/Genres';
 import BottomPagination from '../../components/Pagination/BottomPagination';
-import { changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
+import { changeFavorites, changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
 
 
 const Movies = () => {
 	const dispatch = useDispatch();
 	const { content, page, selectedGenres } = useSelector(state => state.movies);
 	let genreUrl = '';
+
+
+	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
+
+	useEffect(() => {
+		localStorage.setItem('favorites', JSON.stringify(favorites))
+	}, [favorites])
+
+	
+	const handleClick = (movie) => {
+		if (favorites.some(e=> e.id === movie.id)) {
+			setFavorites(favorites?.filter((el) => el?.id !== movie?.id))
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+		} else {
+			setFavorites([...favorites, movie])
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+
+	}}
+	const checkFavorite = (movie) => {
+		if (favorites.some(el => el.id === movie.id)) {
+			return true
+		} else return false
+	}
+
+
 
 	const fetchMovies = async () => {
 		const { data } = await axios.get(
@@ -25,7 +50,6 @@ const Movies = () => {
 
 	useEffect(() => {
 		fetchMovies();
-		console.log('movies content', content);
 	}, [page, selectedGenres]);
 
 
@@ -47,6 +71,8 @@ const Movies = () => {
 							name={el.name}
 							tvdate={el.first_air_date}
 							movie={el}
+							handleClick={handleClick}
+							checkFavorite={checkFavorite}
 						/>
 					))}
 			</div>

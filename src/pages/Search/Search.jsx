@@ -13,6 +13,7 @@ import './Search.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	changeFavorites,
 	changeNumberOfPages,
 	changePage,
 	fetchContent,
@@ -27,6 +28,31 @@ const Search = () => {
 
 	const { content, page, numberOfPages } = useSelector(state => state.movies);
 	const dispatch = useDispatch();
+
+
+	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
+
+	useEffect(() => {
+		localStorage.setItem('favorites', JSON.stringify(favorites))
+	}, [favorites])
+
+	
+	const handleClick = (movie) => {
+		if (favorites.some(e=> e.id === movie.id)) {
+			setFavorites(favorites?.filter((el) => el?.id !== movie?.id))
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+		} else {
+			setFavorites([...favorites, movie])
+			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
+
+	}}
+	const checkFavorite = (movie) => {
+		if (favorites.some(el => el.id === movie.id)) {
+			return true
+		} else return false
+	}
+
+	
 
 	const useStyles = makeStyles({
 		root: {
@@ -46,7 +72,6 @@ const Search = () => {
 				process.env.REACT_APP_API_KEY
 			}&language=ru-RU&page=${page}&include_adult=false&query=${searchText}`
 		);
-		console.log('data', data);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages));
 	};
@@ -54,7 +79,7 @@ const Search = () => {
 	useEffect(() => {
 		window.scroll(0, 0);
 		searchText && fetchSearch();
-	}, [searchText]);
+	}, [searchText, page]);
 
 	const handleChange = text => {
 		setSearchText(text);
@@ -62,7 +87,6 @@ const Search = () => {
 			dispatch(fetchContent([]));
 			dispatch(changeNumberOfPages(1));
 		}
-		console.log('text', text);
 	};
 	return (
 		<div>
@@ -125,6 +149,8 @@ const Search = () => {
 							name={el.name}
 							tvdate={el.first_air_date}
 							movie={el}
+							handleClick={handleClick}
+							checkFavorite={checkFavorite}
 						/>
 					))}
 			</div>

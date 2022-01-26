@@ -7,9 +7,10 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import TvIcon from "@mui/icons-material/Tv";
 import MovieIcon from '@mui/icons-material/Movie';
 import SearchIcon from "@mui/icons-material/Search";
+import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
+import { changeNumberOfPages, changePage, fetchContent } from '../../redux/moviesSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -35,17 +36,26 @@ export default function SimpleBottomNavigation() {
 	const [value, setValue] = React.useState(0);
 	const navigate = useNavigate()
 
+	const clearState = () => {
+		dispatch(fetchContent([]));
+		dispatch(changeNumberOfPages(1));
+		dispatch(changePage(1))
+	}
+
 	useEffect(() => {
 		if (value === 0) {
 			navigate('/')
+			clearState()
+
 		} else if (value === 1) {
 			navigate('/movies')
+			clearState()
+
 		} else if (value === 2) {
 			navigate('/series')
 		} else if (value === 3) {
 			navigate('/search')
-		dispatch(fetchContent([]));
-		dispatch(changeNumberOfPages(1));
+			clearState()
 
 			
 	}
@@ -74,8 +84,8 @@ export default function SimpleBottomNavigation() {
 				/>
          <BottomNavigationAction
         style={{ color: "#00d167" }}
-        label="TV Series"
-        icon={<TvIcon />}
+        label="Favorites"
+        icon={<StarIcon />}
       />
 				<BottomNavigationAction
 					style={{ color: '#00d167' }}
