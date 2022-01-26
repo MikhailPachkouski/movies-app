@@ -6,8 +6,9 @@ const moviesSlice = createSlice({
 		content: [],
 		page: 1,
 		numberOfPages: 1,
-		genres: [],
+		genres: [{}],
 		selectedGenres: [],
+		// favorites: [],
 	},
 	reducers: {
 		fetchContent(state, action) {

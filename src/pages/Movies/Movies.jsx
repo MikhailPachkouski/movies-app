@@ -14,20 +14,18 @@ const Movies = () => {
 
 	const fetchMovies = async () => {
 		const { data } = await axios.get(
-			// `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=ru`
 			`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreUrl}`
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
-		console.log(data);
 	};
 	useEffect(() => {
 		genreUrl = selectedGenres.map((g) =>  g.id).join(',')
-		console.log(genreUrl);
 	}, [page, selectedGenres])
 
 	useEffect(() => {
 		fetchMovies();
+		console.log('movies content', content);
 	}, [page, selectedGenres]);
 
 
@@ -48,6 +46,7 @@ const Movies = () => {
 							vote={el.vote_average}
 							name={el.name}
 							tvdate={el.first_air_date}
+							movie={el}
 						/>
 					))}
 			</div>

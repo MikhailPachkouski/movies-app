@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -7,11 +7,15 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import TvIcon from "@mui/icons-material/Tv";
 import MovieIcon from '@mui/icons-material/Movie';
 import SearchIcon from "@mui/icons-material/Search";
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
+import { useDispatch } from 'react-redux';
 
 
 export default function SimpleBottomNavigation() {
+	const dispatch = useDispatch();
+
 	const useStyles = makeStyles({
 		root: {
 			width: '90%',
@@ -31,9 +35,7 @@ export default function SimpleBottomNavigation() {
 	const [value, setValue] = React.useState(0);
 	const navigate = useNavigate()
 
-	// const history = useHistory();
-
-	React.useEffect(() => {
+	useEffect(() => {
 		if (value === 0) {
 			navigate('/')
 		} else if (value === 1) {
@@ -42,6 +44,10 @@ export default function SimpleBottomNavigation() {
 			navigate('/series')
 		} else if (value === 3) {
 			navigate('/search')
+		dispatch(fetchContent([]));
+		dispatch(changeNumberOfPages(1));
+
+			
 	}
  } , [value])
 

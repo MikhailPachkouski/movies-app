@@ -22,6 +22,7 @@ const Trending = () => {
 
 	useEffect(() => {
 		fetchTrending();
+		console.log(content);
 	}, [page]);
 
 	return (
@@ -39,6 +40,7 @@ const Trending = () => {
 							vote={el.vote_average}
 							name={el.name}
 							tvdate={el.first_air_date}
+							movie={el}
 						/>
 					))}
 			</div>
