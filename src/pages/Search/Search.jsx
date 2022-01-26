@@ -12,7 +12,11 @@ import { Box } from '@mui/system';
 import './Search.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNumberOfPages, changePage, fetchContent } from '../../redux/moviesSlice';
+import {
+	changeNumberOfPages,
+	changePage,
+	fetchContent,
+} from '../../redux/moviesSlice';
 import axios from 'axios';
 import ContentElement from '../../components/ContentElement/ContentElement';
 import BottomPagination from '../../components/Pagination/BottomPagination';
@@ -28,8 +32,6 @@ const Search = () => {
 		root: {
 			width: '90%',
 			backgroundColor: '#262726',
-			textAlign: 'center',
-			color: 'whitesmoke',
 		},
 		wrap: {
 			display: 'flex',
@@ -38,10 +40,11 @@ const Search = () => {
 	});
 	const classes = useStyles();
 
-
 	const fetchSearch = async () => {
 		const { data } = await axios.get(
-			`https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${process.env.REACT_APP_API_KEY}&language=ru-RU&page=${page}&include_adult=false&query=${searchText}`
+			`https://api.themoviedb.org/3/search/${type ? 'tv' : 'movie'}?api_key=${
+				process.env.REACT_APP_API_KEY
+			}&language=ru-RU&page=${page}&include_adult=false&query=${searchText}`
 		);
 		console.log('data', data);
 		dispatch(fetchContent(data.results));
@@ -49,34 +52,35 @@ const Search = () => {
 	};
 
 	useEffect(() => {
-		window.scroll(0,0)
-		searchText && fetchSearch()
-	}, [searchText])
+		window.scroll(0, 0);
+		searchText && fetchSearch();
+	}, [searchText]);
 
-	const handleChange = (text) => {
-		setSearchText(text)
+	const handleChange = text => {
+		setSearchText(text);
 		if (text === '') {
 			dispatch(fetchContent([]));
-		dispatch(changeNumberOfPages(1));
+			dispatch(changeNumberOfPages(1));
 		}
 		console.log('text', text);
-	}
+	};
 	return (
 		<div>
 			<div className='trending__title'>Поиск</div>
 			<div className='trending__content'>
 				<TextField
-				className={classes.root}
-				fullWidth
+					className={classes.root}
+					fullWidth
 					variant='outlined'
 					color='success'
 					focused
 					inputProps={{
 						style: {
-							
+							textAlign: 'center',
+							color: 'whitesmoke',
 						},
 					}}
-					onChange={(e)=>handleChange(e.target.value)}
+					onChange={e => handleChange(e.target.value)}
 				/>
 				{/* <Button
 					// onClick={fetchSearch}
@@ -88,24 +92,24 @@ const Search = () => {
 				</Button> */}
 			</div>
 			<Box fullWidth>
-			<Tabs
-				value={type}
-				indicatorColor='primary'
-				textColor='success'
-				onChange={(event, newValue) => {
-					console.log(newValue);
-					setType(newValue);
-					dispatch(changePage(1));
-					dispatch(fetchContent([]));
-		dispatch(changeNumberOfPages(1));
-				}}
-				style={{ paddingBottom: 5 }}
-				aria-label='disabled tabs example'
-				centered
-			>
-				<Tab style={{ width: '50%' }} label='Search Movies' />
-				<Tab style={{ width: '50%' }} label='Search TV Series' />
-			</Tabs>
+				<Tabs
+					value={type}
+					indicatorColor='primary'
+					textColor='success'
+					onChange={(event, newValue) => {
+						console.log(newValue);
+						setType(newValue);
+						dispatch(changePage(1));
+						dispatch(fetchContent([]));
+						dispatch(changeNumberOfPages(1));
+					}}
+					style={{ paddingBottom: 5 }}
+					aria-label='disabled tabs example'
+					centered
+				>
+					<Tab style={{ width: '50%' }} label='Search Movies' />
+					<Tab style={{ width: '50%' }} label='Search TV Series' />
+				</Tabs>
 			</Box>
 
 			<div className='trending__content'>
@@ -124,7 +128,7 @@ const Search = () => {
 						/>
 					))}
 			</div>
-			{numberOfPages>1 && <BottomPagination/>}
+			{numberOfPages > 1 && <BottomPagination />}
 		</div>
 	);
 };

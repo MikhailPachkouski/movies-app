@@ -58,7 +58,8 @@ export default function SimpleBottomNavigation() {
 				showLabels
 				value={value}
 				onChange={(event, newValue) => {
-					setValue(newValue);
+					setValue(newValue)
+					window.scroll(0,0);
 				}}
 			>
 				<BottomNavigationAction
