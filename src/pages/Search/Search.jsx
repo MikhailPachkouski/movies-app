@@ -131,8 +131,8 @@ const Search = () => {
 					aria-label='disabled tabs example'
 					centered
 				>
-					<Tab style={{ width: '50%' }} label='Search Movies' />
-					<Tab style={{ width: '50%' }} label='Search TV Series' />
+					<Tab style={{ width: '50%' }} label='Поиск фильма' />
+					<Tab style={{ width: '50%' }} label='Поиск сериала' />
 				</Tabs>
 			</Box>
 
