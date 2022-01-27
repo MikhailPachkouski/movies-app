@@ -9,7 +9,6 @@ import './Trending.css'
 const Trending = () => {
 	const { content, page, numberOfPages } = useSelector(state => state.movies);
 	const dispatch = useDispatch();
-	// let trendUrl = `3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
 
 	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 

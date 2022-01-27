@@ -11,17 +11,9 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 	const {favorites} = useSelector(state => state.movies)
 
 	const [isFavorite, setIsFavorite] = useState(false);
-	// const checkFavorite = (movie) => {
-	// 	if (favorites.some(el => el.id === movie.id)) {
-	// 		return true
-	// 	} else return false
-	// }
 
 	useEffect(() => {
-		console.log(favorites);
-		// setFavorites(JSON.parse(localStorage.getItem('favorites')))
 		setIsFavorite(checkFavorite(movie))
-		console.log(isFavorite);
 	}, [favorites])
 	
 
@@ -33,7 +25,6 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 			<div className='contentBlock__subtitle__wrapper'>
 			<span className='contentBlock__subTitle'>
 				{/* {media_type === 'tv' ? 'Сериал' : 'Фильм'} */}
-				{/* <StarBorderIcon onClick={() => handleClick(movie)}/> */}
 				{isFavorite ? <StarIcon color='success' onClick={() => handleClick(movie)}/> : <StarBorderIcon onClick={() => handleClick(movie)}/>} 
 			</span>
 				<span className='contentBlock__subTitle'>{date || tvdate}</span>
