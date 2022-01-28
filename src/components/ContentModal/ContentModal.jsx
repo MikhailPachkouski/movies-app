@@ -175,9 +175,9 @@ export default function ContentModal({
 											{dataMovie?.overview}
 										</p>
 									</Box>
-									<div>
-										<p>Рекомендации:</p>
-										<Carousel dataRecommedation={dataRecommedation?.results} />
+									<div style={{marginBottom: '10px'}}>
+										<span className='movieModal__text'>Рекомендации: </span>
+										{dataRecommedation?.results.length ? <Carousel dataRecommedation={dataRecommedation?.results} /> : <span>отсутствуют.</span>}
 									</div>
 									<Button
 										color='success'
