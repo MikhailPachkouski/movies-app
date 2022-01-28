@@ -7,6 +7,7 @@ const Series = () => {
 
 	useEffect(() => {
 		localStorage.setItem('favorites', JSON.stringify(favorites))
+		console.log(favorites);
 	}, [favorites])
 
 	
@@ -40,6 +41,8 @@ const Series = () => {
 							movie={el}
 							handleClick={handleClick}
 							checkFavorite={checkFavorite}
+							id={el.id}
+
 						/>
 					))}
 			</div>

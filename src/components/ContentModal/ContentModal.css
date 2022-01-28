@@ -1,0 +1,133 @@
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border: #00a048; */
+}
+
+.modal__wrapper {
+	width: 200px;
+	/* padding: 5px; */
+	/* margin: 5px 0; */
+	/* background-color: #262726; */
+	border-radius: 10px;
+	/* position: relative; */
+}
+
+@media (max-width: 550px) {
+	.modal__wrapper {
+		width: 100%;
+	}
+}
+
+.movieModal__img__portrait {
+	display: none;
+	object-fit: contain;
+	width: 40%;
+	border-radius: 10px;
+}
+
+.movieModal__img__landscape {
+	/* display: flex; */
+	object-fit: contain;
+	border-radius: 10px;
+}
+
+.movieModal {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	width: 100%;
+	overflow-y: scroll;
+	scrollbar-width: none;
+}
+
+.movieModal__tagline {
+	padding-bottom: 10px;
+	align-self: center;
+}
+
+.movieModal__about {
+	padding: 10px;
+	width: 95%;
+	height: 90%;
+	display: flex;
+
+	flex-direction: column;
+	/* font-family: "Roboto", sans-serif; */
+	justify-content: space-between;
+	font-weight: 300;
+}
+
+.movieModal__title {
+	height: 12%;
+	font-size: 5vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.movieModal__description {
+	display: flex;
+	/* height: 50%; */
+	overflow-y: scroll;
+	padding: 15px;
+	border-radius: 20px;
+	scrollbar-width: thin; /* Firefox */
+	box-shadow: inset 0 0 5px #4e4d4d;
+	text-align: justify;
+	/* font-size: 15px; */
+	/* line-height: 17px; */
+}
+
+/* .movieModal__description */
+::-webkit-scrollbar {
+	display: none;
+}
+
+.movieModal__star {
+	position: absolute;
+	right: 20px;
+	top: 15px;
+}
+
+.movieModal__text {
+	color:greenyellow;
+	font-weight: bold;
+}
+
+@media (min-width: 835px) {
+	.movieModal__img__landscape {
+		display: none;
+	}
+
+	.movieModal__img__portrait {
+		display: flex;
+		width: 35%;
+	
+	}
+
+	.movieModal {
+		flex-direction: row;
+		justify-content: space-around;
+		/* padding: 10px 0; */
+	}
+
+	.movieModal__about {
+		width: 58%;
+		padding: 0;
+		margin: auto;
+		height: 100%;
+	}
+
+	.movieModal__title {
+		font-size: 3.5vw;
+	}
+
+	.movieModal__description {
+		font-size: 17px;
+	}
+}

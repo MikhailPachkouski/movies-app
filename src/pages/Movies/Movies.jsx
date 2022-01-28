@@ -43,7 +43,9 @@ const Movies = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
+		console.log('movie content', content);
 	};
+
 	useEffect(() => {
 		genreUrl = selectedGenres.map((g) =>  g.id).join(',')
 	}, [page, selectedGenres])
@@ -66,13 +68,15 @@ const Movies = () => {
 							poster={el.poster_path}
 							title={el.title}
 							date={el.release_date}
-							media_type={el.media_type}
+							media_type={el.media_type ? el.media_type : 'movie'}
 							vote={el.vote_average}
 							name={el.name}
 							tvdate={el.first_air_date}
 							movie={el}
 							handleClick={handleClick}
 							checkFavorite={checkFavorite}
+							id={el.id}
+
 						/>
 					))}
 			</div>

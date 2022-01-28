@@ -74,6 +74,7 @@ const Search = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages));
+		console.log('search', content);
 	};
 
 	useEffect(() => {
@@ -144,13 +145,15 @@ const Search = () => {
 							poster={el.poster_path}
 							title={el.title}
 							date={el.release_date}
-							media_type={el.media_type}
+							media_type={`${type ? 'tv' : 'movie'}`}
 							vote={el.vote_average}
 							name={el.name}
 							tvdate={el.first_air_date}
 							movie={el}
 							handleClick={handleClick}
 							checkFavorite={checkFavorite}
+							id={el.id}
+
 						/>
 					))}
 			</div>

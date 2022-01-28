@@ -10,7 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { changeNumberOfPages, changePage, fetchContent } from '../../redux/moviesSlice';
+import { changeNumberOfPages, changePage, fetchContent, getGenres } from '../../redux/moviesSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -40,6 +40,7 @@ export default function SimpleBottomNavigation() {
 		dispatch(fetchContent([]));
 		dispatch(changeNumberOfPages(1));
 		dispatch(changePage(1))
+		dispatch(getGenres([]))
 	}
 
 	useEffect(() => {

@@ -64,6 +64,7 @@ const Trending = () => {
 							movie={el}
 							handleClick={handleClick}
 							checkFavorite={checkFavorite}
+							id={el.id}
 						/>
 					))}
 			</div>

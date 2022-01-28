@@ -4,8 +4,9 @@ import './ContentElement.css';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { useSelector } from 'react-redux';
+import ContentModal from '../ContentModal/ContentModal';
 
-const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, movie, handleClick, checkFavorite }) => {
+const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, movie, handleClick, checkFavorite, id }) => {
 	const img_w300 = 'https://image.tmdb.org/t/p/w300';
 	const unavailableImage = "https://www.movienewz.com/img/films/poster-holder.jpg";
 	const {favorites} = useSelector(state => state.movies)
@@ -18,18 +19,24 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 	
 
 	return (
+		<>
 		<div className='contentBlock'>
 		<Badge color={vote>=7 ? 'success' : 'secondary'} badgeContent={vote}/>
+
+		<ContentModal type={media_type} id={id} isFavorite={isFavorite} handleClick={handleClick} movie={movie}>
 			<img className='contentBlock__poster' src={poster ? `${img_w300}${poster}` : unavailableImage} alt={title} />
+		</ContentModal>
+
 			<strong className='contentBlock__title'>{title || name}</strong>
 			<div className='contentBlock__subtitle__wrapper'>
 			<span className='contentBlock__subTitle'>
 				{/* {media_type === 'tv' ? 'Сериал' : 'Фильм'} */}
 				{isFavorite ? <StarIcon color='success' onClick={() => handleClick(movie)}/> : <StarBorderIcon onClick={() => handleClick(movie)}/>} 
 			</span>
-				<span className='contentBlock__subTitle'>{date || tvdate}</span>
+				<span className='contentBlock__subTitle'>{date?.split('-').reverse().join('.') || tvdate?.split('-').reverse().join('.')}</span>
 				</div>
-		</div>
+				</div>
+		</>
 	);
 };
 
