@@ -9,6 +9,9 @@ const moviesSlice = createSlice({
 		genres: [{}],
 		selectedGenres: [],
 		favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+		searchText: '',
+		typeContent: 0,
+		valueNavBar: 0,
 	},
 	reducers: {
 		fetchContent(state, action) {
@@ -27,10 +30,21 @@ const moviesSlice = createSlice({
 			state.selectedGenres.push(action.payload);
 		},
 		removeSelectedGenres(state, action) {
-			state.selectedGenres = state.selectedGenres.filter((g) => g.id !== action.payload.id);
+			state.selectedGenres = state.selectedGenres.filter(
+				g => g.id !== action.payload.id
+			);
 		},
 		changeFavorites(state, action) {
-			state.favorites = [...action.payload]
+			state.favorites = [...action.payload];
+		},
+		changeSearchText(state, action) {
+			state.searchText = action.payload;
+		},
+		changeTypeContent(state, action) {
+			state.typeContent = action.payload
+		},
+		changeValueNavBar(state, action) {
+			state.valueNavBar = action.payload
 		}
 	},
 });
@@ -44,4 +58,7 @@ export const {
 	addSelectedGenres,
 	removeSelectedGenres,
 	changeFavorites,
+	changeSearchText,
+	changeTypeContent,
+	changeValueNavBar,
 } = moviesSlice.actions;

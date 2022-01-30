@@ -39,7 +39,6 @@ const Trending = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
-			console.log(content);
 	};
 
 	useEffect(() => {

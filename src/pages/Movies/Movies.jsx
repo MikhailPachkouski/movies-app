@@ -47,7 +47,7 @@ const Movies = () => {
 	};
 
 	useEffect(() => {
-		genreUrl = selectedGenres.map((g) =>  g.id).join(',')
+		genreUrl = selectedGenres.map((g) =>  g.id)?.join(',')
 	}, [page, selectedGenres])
 
 	useEffect(() => {

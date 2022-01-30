@@ -5,7 +5,7 @@ import SimpleBottomNavigation from './components/BottomNav/BottomNav';
 import Header from './components/Header/Header';
 import Movies from './pages/Movies/Movies';
 import Search from './pages/Search/Search';
-import Series from './pages/Series/Series';
+import Favorites from './pages/Favorites/Favorites';
 import Trending from './pages/Trending/Trending';
 
 
@@ -19,7 +19,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Trending/>} exact />
 						<Route path='/movies' element={<Movies/>} />
-						<Route path='/series' element={<Series/>} />
+						<Route path='/favorites' element={<Favorites/>} />
 						<Route path='/search' element={<Search/>} />
 					</Routes>
 				</Container>

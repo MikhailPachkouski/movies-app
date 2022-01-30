@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import {
-	Button,
-	createTheme,
-	Input,
+	// Button,
+	// createTheme,
+	// Input,
 	Tab,
 	Tabs,
 	TextField,
 } from '@mui/material';
-import { makeStyles, ThemeProvider } from '@mui/styles';
+import { makeStyles} from '@mui/styles';
 import { Box } from '@mui/system';
 import './Search.css';
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	changeFavorites,
 	changeNumberOfPages,
 	changePage,
+	changeSearchText,
 	fetchContent,
 } from '../../redux/moviesSlice';
 import axios from 'axios';
@@ -23,10 +24,9 @@ import ContentElement from '../../components/ContentElement/ContentElement';
 import BottomPagination from '../../components/Pagination/BottomPagination';
 
 const Search = () => {
-	const [type, setType] = useState(0);
-	const [searchText, setSearchText] = useState('');
-
-	const { content, page, numberOfPages } = useSelector(state => state.movies);
+	
+	const { content, page, numberOfPages, searchText, typeContent } = useSelector(state => state.movies);
+	const [type, setType] = useState(typeContent);
 	const dispatch = useDispatch();
 
 
@@ -74,16 +74,16 @@ const Search = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages));
-		console.log('search', content);
 	};
 
 	useEffect(() => {
 		window.scroll(0, 0);
 		searchText && fetchSearch();
+		   // eslint-disable-next-line
 	}, [searchText, page]);
 
 	const handleChange = text => {
-		setSearchText(text);
+		dispatch(changeSearchText(text));
 		if (text === '') {
 			dispatch(fetchContent([]));
 			dispatch(changeNumberOfPages(1));

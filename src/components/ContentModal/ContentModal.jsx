@@ -63,7 +63,6 @@ export default function ContentModal({
 		);
 
 		setDataMovie(data);
-		// console.log(data);
 	};
 
 	const fetchRecommedations = async () => {
@@ -76,7 +75,6 @@ export default function ContentModal({
 		);
 
 		setDataRecommedation(data);
-		console.log(type, data);
 	};
 
 	React.useEffect(() => {
@@ -86,10 +84,12 @@ export default function ContentModal({
 
 	return (
 		<>
+		
 			<div onClick={handleOpen} className='modal__wrapper'>
 				{/* </div> className='contentBlock'> */}
 				{children}
 			</div>
+			{dataMovie && 
 			<Modal
 				aria-labelledby='transition-modal-title'
 				aria-describedby='transition-modal-description'
@@ -103,8 +103,10 @@ export default function ContentModal({
 				className='modal'
 			>
 				<Fade in={open}>
-					{dataMovie && (
-						<Box sx={style}>
+					{/* {dataMovie && (
+						
+					)} */}
+					<Box sx={style}>
 							<div className='movieModal'>
 								<img
 									src={
@@ -189,13 +191,12 @@ export default function ContentModal({
 								</div>
 							</div>
 						</Box>
-					)}
 
 					{/* <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography> */}
 				</Fade>
-			</Modal>
+			</Modal>}
 		</>
 	);
 }

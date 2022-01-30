@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ContentElement from '../../components/ContentElement/ContentElement';
 
-const Series = () => {
+const Favorites = () => {
 
 	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 
 	useEffect(() => {
 		localStorage.setItem('favorites', JSON.stringify(favorites))
-		console.log(favorites);
 	}, [favorites])
 
 	
@@ -49,4 +48,4 @@ const Series = () => {
 				</div>;
 };
 
-export default Series;
+export default Favorites;

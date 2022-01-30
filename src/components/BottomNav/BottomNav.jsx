@@ -4,14 +4,13 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { makeStyles } from '@mui/styles';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
-import TvIcon from "@mui/icons-material/Tv";
 import MovieIcon from '@mui/icons-material/Movie';
 import SearchIcon from "@mui/icons-material/Search";
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { changeNumberOfPages, changePage, fetchContent, getGenres } from '../../redux/moviesSlice';
-import { useDispatch } from 'react-redux';
+import { changeNumberOfPages, changePage, changeSearchText, changeTypeContent, changeValueNavBar, fetchContent, getGenres } from '../../redux/moviesSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function SimpleBottomNavigation() {
@@ -33,7 +32,8 @@ export default function SimpleBottomNavigation() {
 	});
 
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
+	const {valueNavBar} = useSelector(state=> state.movies)
+	// const [value, setValue] = React.useState(0);
 	const navigate = useNavigate()
 
 	const clearState = () => {
@@ -41,36 +41,38 @@ export default function SimpleBottomNavigation() {
 		dispatch(changeNumberOfPages(1));
 		dispatch(changePage(1))
 		dispatch(getGenres([]))
+		dispatch(changeTypeContent(0))
+		dispatch(changeSearchText(''))
 	}
 
 	useEffect(() => {
-		if (value === 0) {
+		if (valueNavBar === 0) {
 			navigate('/')
 			clearState()
-
-		} else if (value === 1) {
+		} else if (valueNavBar === 1) {
 			navigate('/movies')
 			clearState()
-
-		} else if (value === 2) {
-			navigate('/series')
-		} else if (value === 3) {
+		} else if (valueNavBar === 2) {
+			navigate('/favorites')
+		} else if (valueNavBar === 3) {
 			navigate('/search')
-			clearState()
-
-			
+			// clearState()
+			dispatch(changeNumberOfPages(1));
+		dispatch(changePage(1))
+		dispatch(getGenres([]))
 	}
- } , [value])
+	   // eslint-disable-next-line
+ } , [valueNavBar])
 
 	return (
 		<Box className={classes.wrap}>
 			<BottomNavigation
 				className={classes.root}
 				showLabels
-				value={value}
+				value={valueNavBar}
 				onChange={(event, newValue) => {
-					setValue(newValue)
 					window.scroll(0,0);
+					dispatch(changeValueNavBar(newValue))
 				}}
 			>
 				<BottomNavigationAction
