@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
+import LocaleToggler from '../../components/LocaleToggler/LocaleToggler';
 import BottomPagination from '../../components/Pagination/BottomPagination';
 import { changeFavorites, changeNumberOfPages, fetchContent } from '../../redux/moviesSlice';
 import './Trending.css'
 
 const Trending = () => {
-	const { content, page, numberOfPages } = useSelector(state => state.movies);
+	const { content, page, numberOfPages, locale } = useSelector(state => state.movies);
 	const dispatch = useDispatch();
 
 	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
@@ -35,7 +36,7 @@ const Trending = () => {
 
 	const fetchTrending = async () => {
 		const { data } = await axios.get(
-			`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&language=ru&page=${page}`
+			`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}&page=${page}`
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
@@ -43,11 +44,12 @@ const Trending = () => {
 
 	useEffect(() => {
 		fetchTrending();
-	}, [page]);
+	}, [page, locale]);
 
 	return (
 		<div>
-			<div className='trending__title'>Популярное</div>
+			<div className='trending__title'>{locale==='ru-RU' ? 'Популярное' : 'Trending'}</div>
+			<div className='locale__wrapper'><LocaleToggler/></div>
 			<div className='trending__content'>
 				{content &&
 					content.map(el => (

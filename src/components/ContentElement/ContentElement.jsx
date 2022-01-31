@@ -30,7 +30,6 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 			<strong className='contentBlock__title'>{title || name}</strong>
 			<div className='contentBlock__subtitle__wrapper'>
 			<span className='contentBlock__subTitle'>
-				{/* {media_type === 'tv' ? 'Сериал' : 'Фильм'} */}
 				{isFavorite ? <StarIcon color='success' onClick={() => handleClick(movie)}/> : <StarBorderIcon onClick={() => handleClick(movie)}/>} 
 			</span>
 				<span className='contentBlock__subTitle'>{date?.split('-').reverse().join('.') || tvdate?.split('-').reverse().join('.')}</span>

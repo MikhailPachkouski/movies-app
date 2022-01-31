@@ -23,3 +23,11 @@
   }
 }
 
+.locale__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  /* margin: 10px; */
+  position: relative;
+  top: -35px;
+  margin-bottom: -25px;
+}

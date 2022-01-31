@@ -12,6 +12,7 @@ const moviesSlice = createSlice({
 		searchText: '',
 		typeContent: 0,
 		valueNavBar: 0,
+		locale: 'ru-RU',
 	},
 	reducers: {
 		fetchContent(state, action) {
@@ -45,6 +46,9 @@ const moviesSlice = createSlice({
 		},
 		changeValueNavBar(state, action) {
 			state.valueNavBar = action.payload
+		},
+		changeLocale(state, action) {
+			state.locale = action.payload
 		}
 	},
 });
@@ -61,4 +65,5 @@ export const {
 	changeSearchText,
 	changeTypeContent,
 	changeValueNavBar,
+	changeLocale,
 } = moviesSlice.actions;

@@ -32,7 +32,7 @@ export default function SimpleBottomNavigation() {
 	});
 
 	const classes = useStyles();
-	const {valueNavBar} = useSelector(state=> state.movies)
+	const {valueNavBar, locale} = useSelector(state=> state.movies)
 	// const [value, setValue] = React.useState(0);
 	const navigate = useNavigate()
 
@@ -53,8 +53,11 @@ export default function SimpleBottomNavigation() {
 			navigate('/movies')
 			clearState()
 		} else if (valueNavBar === 2) {
-			navigate('/favorites')
+			navigate('/series')
+			clearState()
 		} else if (valueNavBar === 3) {
+			navigate('/favorites')
+		} else if (valueNavBar === 4) {
 			navigate('/search')
 			// clearState()
 			dispatch(changeNumberOfPages(1));
@@ -76,23 +79,28 @@ export default function SimpleBottomNavigation() {
 				}}
 			>
 				<BottomNavigationAction
-					label='Trending'
+					label={locale==='ru-RU' ? 'Популярное' : 'Trending'}
 					style={{ color: '#00d167' }}
 					icon={<WhatshotIcon />}
 				/>
 				<BottomNavigationAction
 					style={{ color: '#00d167' }}
-					label="Movies"
+					label={locale==='ru-RU' ? 'Фильмы' : 'Movies'}
+        icon={<MovieIcon />}
+				/>
+				<BottomNavigationAction
+					style={{ color: '#00d167' }}
+					label={locale==='ru-RU' ? 'Сериалы' : 'Series'}
         icon={<MovieIcon />}
 				/>
          <BottomNavigationAction
         style={{ color: "#00d167" }}
-        label="Favorites"
+        label={locale==='ru-RU' ? 'Избранное' : 'Favorites'}
         icon={<StarIcon />}
       />
 				<BottomNavigationAction
 					style={{ color: '#00d167' }}
-					label="Search"
+					label={locale==='ru-RU' ? 'Поиск' : 'Search'}
         icon={<SearchIcon />}
 				/>
 			</BottomNavigation>

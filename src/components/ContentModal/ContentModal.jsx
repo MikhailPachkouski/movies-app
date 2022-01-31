@@ -10,6 +10,10 @@ import './ContentModal.css';
 import Carousel from './Carousel/Carousel';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { useDispatch, useSelector } from 'react-redux';
+import CarouselActors from '../CarouselActors/CarouselActors';
+import { changeTypeContent } from '../../redux/moviesSlice';
 
 const style = {
 	position: 'absolute',
@@ -40,9 +44,17 @@ export default function ContentModal({
 	movie,
 }) {
 	const [open, setOpen] = React.useState(false);
-
+	const {locale, typeContent} = useSelector(state=>state.movies);
 	const [dataMovie, setDataMovie] = React.useState();
+	const [dataVideo, setDataVideo] = React.useState();
 	const [dataRecommedation, setDataRecommedation] = React.useState();
+
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(changeTypeContent(type==='movie' ? 1 : 0))
+	}, []);
+	
 
 	const img_w500 = 'https://image.tmdb.org/t/p/w500';
 	const unavailableImage =
@@ -57,9 +69,9 @@ export default function ContentModal({
 	const handleClose = () => setOpen(false);
 
 	const fetchData = async () => {
-		type = type ==='tv' ? type : 'movie'
+		// type = typeContent===0 ? 'tv' : 'movie'
 		const { data } = await axios.get(
-			`https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=ru-RU`
+			`https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
 		);
 
 		setDataMovie(data);
@@ -68,19 +80,31 @@ export default function ContentModal({
 	const fetchRecommedations = async () => {
 		const { data } = await axios.get(
 			`https://api.themoviedb.org/3/${
-				type === 'movie' ? 'movie' : 'tv'
+				// typeContent === 0 ? 'tv' : 'movie'
+				type
 			}/${id}/recommendations?api_key=${
 				process.env.REACT_APP_API_KEY
-			}&language=ru-RU&page=1`
+			}&language=${locale}&page=1`
 		);
 
 		setDataRecommedation(data);
 	};
 
+	const fetchVideo = async () => {
+		type = typeContent===0 ? 'tv' : 'movie'
+
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
+    );
+
+    setDataVideo(data.results[0]?.key);
+  };
+
 	React.useEffect(() => {
 		fetchData();
+		fetchVideo()
 		// eslint-disable-next-line
-	}, []);
+	}, [locale]);
 
 	return (
 		<>
@@ -142,7 +166,7 @@ export default function ContentModal({
 								<div className='movieModal__about'>
 									<Typography
 										id='transition-modal-title'
-										variant='h6'
+										variant='h5'
 										component='h2'
 										className='movieModal__title movieModal__text'
 									>
@@ -154,7 +178,7 @@ export default function ContentModal({
 									)} */}
 									<Box>
 										<p>
-											<span className='movieModal__text'>Дата выхода:{' '}</span>
+											<span className='movieModal__text'>{locale==='ru-RU' ? 'Дата выхода:' : 'Release date:'}{' '}</span>
 											{dataMovie.release_date?.split('-').reverse().join('.') ||
 												dataMovie.first_air_date
 													?.split('-')
@@ -162,15 +186,28 @@ export default function ContentModal({
 													.join('.')}
 										</p>
 										<p>
-										<span className='movieModal__text'>Жанр:{' '}</span>
+										<span className='movieModal__text'>{locale==='ru-RU' ? 'Жанр:' : 'Genre:'}{' '}</span>
 											{dataMovie.genres?.map(el => (
 												<span key={el.id}>{el.name} </span>
 											))}
 										</p>
 										<p>
-										<span className='movieModal__text'>Рейтинг IMDB:</span> {dataMovie?.vote_average} (
+										<span className='movieModal__text'>{locale==='ru-RU' ? 'Рейтинг IMDB:' : 'Rating IMDB:'}</span> {dataMovie?.vote_average} (
 											{dataMovie?.vote_count})
 										</p>
+										<Button
+                    variant="contained"
+                    startIcon={<YouTubeIcon />}
+                    color="success"
+                    target="__blank"
+                    href={`https://www.youtube.com/watch?v=${dataVideo}`}
+                  >
+                    Watch the Trailer
+                  </Button>
+									<div style={{marginBottom: '10px', marginTop: '10px'}}>
+										<span className='movieModal__text'>{locale==='ru-RU' ? 'Актерский состав: ' : 'Starring: '}</span>
+										{dataMovie ? <CarouselActors type={typeContent===0 ? 'tv' : 'movie'} id={dataMovie.id}/> : <span>{locale==='ru-RU' ? 'отсутствуют.' : 'not found.'}</span>}
+									</div>
 									</Box>
 									<Box>
 										<p className='movieModal__description'>
@@ -178,15 +215,15 @@ export default function ContentModal({
 										</p>
 									</Box>
 									<div style={{marginBottom: '10px'}}>
-										<span className='movieModal__text'>Рекомендации: </span>
-										{dataRecommedation?.results.length ? <Carousel dataRecommedation={dataRecommedation?.results} /> : <span>отсутствуют.</span>}
+										<span className='movieModal__text'>{locale==='ru-RU' ? 'Рекомендации: ' : 'Recommendations: '}</span>
+										{dataRecommedation?.results.length ? <Carousel dataRecommedation={dataRecommedation?.results} /> : <span>{locale==='ru-RU' ? 'отсутствуют.' : 'not found.'}</span>}
 									</div>
 									<Button
 										color='success'
 										variant='contained'
 										onClick={handleClose}
 									>
-										Закрыть
+										{locale==='ru-RU' ? 'Закрыть' : 'Close'}
 									</Button>
 								</div>
 							</div>

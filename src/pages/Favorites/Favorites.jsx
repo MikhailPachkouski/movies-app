@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import ContentElement from '../../components/ContentElement/ContentElement';
+import LocaleToggler from '../../components/LocaleToggler/LocaleToggler';
 
 const Favorites = () => {
-
+	const {locale} = useSelector(state=>state.movies)
 	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 
 	useEffect(() => {
@@ -24,7 +26,9 @@ const Favorites = () => {
 
 	return <div>
 		
-		<div className='trending__title'>Избранное</div>
+		<div className='trending__title'>{locale==='ru-RU' ? 'Избранное' : 'Favorites'}</div>
+		<div className='locale__wrapper'><LocaleToggler/></div>
+
 			<div className='trending__content'>
 				{favorites &&
 					favorites.map(el => (

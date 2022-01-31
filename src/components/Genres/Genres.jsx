@@ -6,13 +6,14 @@ import { addSelectedGenres, changePage, getGenres, removeSelectedGenres } from '
 
 const Genres = () => {
 	const dispatch = useDispatch();
-	const { genres, selectedGenres } = useSelector(state => state.movies);
+	const { genres, selectedGenres, locale, typeContent } = useSelector(state => state.movies);
 
 	const fetchGenres = async () => {
 		const { data } = await axios.get(
-			`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=ru-RU`
+			`https://api.themoviedb.org/3/genre/${typeContent ? 'movie' : 'tv'}/list?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
 		);
 		dispatch(getGenres(data.genres));
+		console.log(data);
 
 	};
 
@@ -20,9 +21,9 @@ const Genres = () => {
 		fetchGenres();
 
 		return () => {
-			dispatch(getGenres({}))
+			dispatch(getGenres([]))
 		}
-	}, []);
+	}, [locale, typeContent]);
 
 	const handleClick = genre => {
 		dispatch(addSelectedGenres(genre))

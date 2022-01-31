@@ -22,10 +22,11 @@ import {
 import axios from 'axios';
 import ContentElement from '../../components/ContentElement/ContentElement';
 import BottomPagination from '../../components/Pagination/BottomPagination';
+import LocaleToggler from '../../components/LocaleToggler/LocaleToggler';
 
 const Search = () => {
 	
-	const { content, page, numberOfPages, searchText, typeContent } = useSelector(state => state.movies);
+	const { content, page, numberOfPages, searchText, typeContent, locale } = useSelector(state => state.movies);
 	const [type, setType] = useState(typeContent);
 	const dispatch = useDispatch();
 
@@ -70,7 +71,7 @@ const Search = () => {
 		const { data } = await axios.get(
 			`https://api.themoviedb.org/3/search/${type ? 'tv' : 'movie'}?api_key=${
 				process.env.REACT_APP_API_KEY
-			}&language=ru-RU&page=${page}&include_adult=false&query=${searchText}`
+			}&language=${locale}&page=${page}&include_adult=false&query=${searchText}`
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages));
@@ -80,7 +81,7 @@ const Search = () => {
 		window.scroll(0, 0);
 		searchText && fetchSearch();
 		   // eslint-disable-next-line
-	}, [searchText, page]);
+	}, [searchText, page, locale]);
 
 	const handleChange = text => {
 		dispatch(changeSearchText(text));
@@ -91,7 +92,9 @@ const Search = () => {
 	};
 	return (
 		<div>
-			<div className='trending__title'>Поиск</div>
+			<div className='trending__title'>{locale==='ru-RU' ? 'Поиск' : 'Search'}</div>
+			<div className='locale__wrapper'><LocaleToggler/></div>
+
 			<div className='trending__content'>
 				<TextField
 					className={classes.root}
@@ -132,8 +135,8 @@ const Search = () => {
 					aria-label='disabled tabs example'
 					centered
 				>
-					<Tab style={{ width: '50%' }} label='Поиск фильма' />
-					<Tab style={{ width: '50%' }} label='Поиск сериала' />
+					<Tab style={{ width: '50%' }} label={locale==='ru-RU' ? 'Поиск фильма' : 'Search movie'} />
+					<Tab style={{ width: '50%' }} label={locale==='ru-RU' ? 'Поиск сериала' : 'Search series'} />
 				</Tabs>
 			</Box>
 

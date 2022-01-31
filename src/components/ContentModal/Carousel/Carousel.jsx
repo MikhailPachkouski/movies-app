@@ -23,7 +23,7 @@ const Carousel = ({ dataRecommedation }) => {
 		navigate('/search');
 		dispatch(changeSearchText(el.title || el.name));
 		dispatch(changeTypeContent(el.media_type === 'movie' ? 0 : 1));
-		dispatch(changeValueNavBar(3));
+		dispatch(changeValueNavBar(4));
 	};
 
 	const items = dataRecommedation?.map(el => (

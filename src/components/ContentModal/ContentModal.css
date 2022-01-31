@@ -2,16 +2,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* border: #00a048; */
 }
 
 .modal__wrapper {
 	width: 200px;
-	/* padding: 5px; */
-	/* margin: 5px 0; */
-	/* background-color: #262726; */
 	border-radius: 10px;
-	/* position: relative; */
 }
 
 @media (max-width: 550px) {
@@ -28,7 +23,6 @@
 }
 
 .movieModal__img__landscape {
-	/* display: flex; */
 	object-fit: contain;
 	border-radius: 10px;
 }
@@ -55,7 +49,7 @@
 	display: flex;
 
 	flex-direction: column;
-	/* font-family: "Roboto", sans-serif; */
+	font-family: "Roboto", sans-serif;
 	justify-content: space-between;
 	font-weight: 300;
 }
@@ -72,15 +66,12 @@
 
 .movieModal__description {
 	display: flex;
-	/* height: 50%; */
 	overflow-y: scroll;
 	padding: 15px;
 	border-radius: 20px;
-	scrollbar-width: thin; /* Firefox */
+	scrollbar-width: thin;
 	box-shadow: inset 0 0 5px #4e4d4d;
 	text-align: justify;
-	/* font-size: 15px; */
-	/* line-height: 17px; */
 }
 
 /* .movieModal__description */
@@ -113,7 +104,6 @@
 	.movieModal {
 		flex-direction: row;
 		justify-content: space-around;
-		/* padding: 10px 0; */
 	}
 
 	.movieModal__about {
