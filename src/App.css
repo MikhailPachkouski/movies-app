@@ -25,9 +25,10 @@
 
 .locale__wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin: 10px 0;
   /* margin: 10px; */
-  position: relative;
+  /* position: relative;
   top: -35px;
-  margin-bottom: -25px;
+  margin-bottom: -25px; */
 }

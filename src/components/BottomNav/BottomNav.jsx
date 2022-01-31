@@ -18,7 +18,7 @@ export default function SimpleBottomNavigation() {
 
 	const useStyles = makeStyles({
 		root: {
-			width: '90%',
+			width: '95%',
 			position: 'fixed',
 			bottom: 0,
 			backgroundColor: '#262726',
@@ -77,10 +77,11 @@ export default function SimpleBottomNavigation() {
 					window.scroll(0,0);
 					dispatch(changeValueNavBar(newValue))
 				}}
+				
 			>
 				<BottomNavigationAction
-					label={locale==='ru-RU' ? 'Популярное' : 'Trending'}
-					style={{ color: '#00d167' }}
+					label={locale==='ru-RU' ? 'Тренды' : 'Trending'}
+					style={{ color: '#00d167', }}
 					icon={<WhatshotIcon />}
 				/>
 				<BottomNavigationAction

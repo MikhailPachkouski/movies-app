@@ -65,6 +65,7 @@ export default function ContentModal({
 	const handleOpen = () => {
 		setOpen(true);
 		fetchRecommedations();
+		fetchVideo();
 	};
 	const handleClose = () => setOpen(false);
 
@@ -102,7 +103,6 @@ export default function ContentModal({
 
 	React.useEffect(() => {
 		fetchData();
-		fetchVideo()
 		// eslint-disable-next-line
 	}, [locale]);
 
