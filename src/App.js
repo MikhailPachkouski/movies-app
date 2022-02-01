@@ -13,7 +13,7 @@ import Series from './pages/Series/Series';
 function App() {
 	return (
 		
-		<BrowserRouter>
+		<BrowserRouter basename='/movies-app-pmv'>
 			<Header />
 			<div className='App'>
 				<Container maxWidth='lg'>
