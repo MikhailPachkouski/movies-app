@@ -26,7 +26,9 @@ const Movies = () => {
 			setFavorites(favorites?.filter((el) => el?.id !== movie?.id))
 			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
 		} else {
-			setFavorites([...favorites, movie])
+			const movieNew = {...movie, media_type: 'movie'}
+			
+			setFavorites([...favorites, movieNew])
 			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
 
 	}}

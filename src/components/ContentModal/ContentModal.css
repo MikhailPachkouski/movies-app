@@ -17,13 +17,25 @@
 
 .movieModal__img__portrait {
 	display: none;
-	object-fit: contain;
+	object-fit: scale-down;
 	width: 40%;
+	border-radius: 10px;
+}
+
+.moviePage__img__portrait {
+	display: none;
+	object-fit: scale-down;
+	width: 100%;
 	border-radius: 10px;
 }
 
 .movieModal__img__landscape {
 	object-fit: contain;
+	border-radius: 10px;
+}
+.moviePage__img__landscape {
+	/* object-fit: contain; */
+	width: 100%;
 	border-radius: 10px;
 }
 
@@ -35,6 +47,10 @@
 	width: 100%;
 	overflow-y: scroll;
 	scrollbar-width: none;
+}
+
+.movieModal__img {
+	width: 100%;
 }
 
 .movieModal__tagline {
@@ -85,6 +101,14 @@
 	top: 15px;
 }
 
+.moviePage__star {
+	position: relative;
+	top: 7px;
+	left: 10px
+	/* bottom: 50%; */
+	/* margin-top: 10px; */
+}
+
 .movieModal__text {
 	color:#00a048;
 	font-weight: bold;
@@ -94,10 +118,18 @@
 	.movieModal__img__landscape {
 		display: none;
 	}
+	.moviePage__img__landscape {
+		display: none;
+	}
 
 	.movieModal__img__portrait {
 		display: flex;
 		width: 35%;
+	
+	}
+	.moviePage__img__portrait {
+		display: flex;
+		width: 90%;
 	
 	}
 

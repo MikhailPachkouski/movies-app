@@ -8,17 +8,19 @@ import Search from './pages/Search/Search';
 import Favorites from './pages/Favorites/Favorites';
 import Trending from './pages/Trending/Trending';
 import Series from './pages/Series/Series';
+import MoviePage from './pages/MoviePage/MoviePage';
 
 
 function App() {
 	return (
 		
-		<BrowserRouter basename='/movies-app-pmv'>
+		<BrowserRouter >
 			<Header />
 			<div className='App'>
 				<Container maxWidth='lg'>
 					<Routes>
 						<Route path='/' element={<Trending/>} exact />
+						<Route path='/:type/:id' element={<MoviePage/>}/>
 						<Route path='/movies' element={<Movies/>} />
 						<Route path='/series' element={<Series/>} />
 						<Route path='/favorites' element={<Favorites/>} />

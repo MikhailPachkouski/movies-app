@@ -27,6 +27,7 @@ const Trending = () => {
 			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))))
 
 	}}
+
 	const checkFavorite = (movie) => {
 		if (favorites.some(el => el.id === movie.id)) {
 			return true
@@ -44,6 +45,7 @@ const Trending = () => {
 
 	useEffect(() => {
 		fetchTrending();
+		// eslint-disable-next-line
 	}, [page, locale]);
 
 	return (

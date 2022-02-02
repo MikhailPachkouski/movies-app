@@ -31,7 +31,9 @@ const Series = () => {
 			setFavorites(favorites?.filter(el => el?.id !== movie?.id));
 			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))));
 		} else {
-			setFavorites([...favorites, movie]);
+			const movieNew = {...movie, media_type: 'tv'}
+			
+			setFavorites([...favorites, movieNew])
 			dispatch(changeFavorites(JSON.parse(localStorage.getItem('favorites'))));
 		}
 	};

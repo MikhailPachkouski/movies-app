@@ -52,7 +52,8 @@ export default function ContentModal({
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(changeTypeContent(type==='movie' ? 1 : 0))
+		dispatch(changeTypeContent(type==='movie' ? 1 : 0));
+				// eslint-disable-next-line
 	}, []);
 	
 
@@ -74,7 +75,7 @@ export default function ContentModal({
 		const { data } = await axios.get(
 			`https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
 		);
-
+			console.log(type);
 		setDataMovie(data);
 	};
 
@@ -92,7 +93,7 @@ export default function ContentModal({
 	};
 
 	const fetchVideo = async () => {
-		type = typeContent===0 ? 'tv' : 'movie'
+		// type = typeContent===0 ? 'tv' : 'movie'
 
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
@@ -206,7 +207,7 @@ export default function ContentModal({
                   </Button>
 									<div style={{marginBottom: '10px', marginTop: '10px'}}>
 										<span className='movieModal__text'>{locale==='ru-RU' ? 'Актерский состав: ' : 'Starring: '}</span>
-										{dataMovie ? <CarouselActors type={typeContent===0 ? 'tv' : 'movie'} id={dataMovie.id}/> : <span>{locale==='ru-RU' ? 'отсутствуют.' : 'not found.'}</span>}
+										{dataMovie ? <CarouselActors type={type} id={dataMovie.id}/> : <span>{locale==='ru-RU' ? 'отсутствуют.' : 'not found.'}</span>}
 									</div>
 									</Box>
 									<Box>

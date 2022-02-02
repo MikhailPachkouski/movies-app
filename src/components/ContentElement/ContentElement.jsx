@@ -5,6 +5,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { useSelector } from 'react-redux';
 import ContentModal from '../ContentModal/ContentModal';
+import { Link } from 'react-router-dom';
 
 const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, movie, handleClick, checkFavorite, id }) => {
 	const img_w300 = 'https://image.tmdb.org/t/p/w300';
@@ -15,6 +16,7 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 
 	useEffect(() => {
 		setIsFavorite(checkFavorite(movie))
+				// eslint-disable-next-line
 	}, [favorites])
 	
 
@@ -27,7 +29,9 @@ const ContentElement = ({ poster, title, date, media_type, vote, name, tvdate, m
 			<img className='contentBlock__poster' src={poster ? `${img_w300}${poster}` : unavailableImage} alt={title} />
 		</ContentModal>
 
+			<Link to={`/${media_type}/${id}`} className='contentBlock__title'>
 			<strong className='contentBlock__title'>{title || name}</strong>
+			</Link>
 			<div className='contentBlock__subtitle__wrapper'>
 			<span className='contentBlock__subTitle'>
 				{isFavorite ? <StarIcon color='success' onClick={() => handleClick(movie)}/> : <StarBorderIcon onClick={() => handleClick(movie)}/>} 
