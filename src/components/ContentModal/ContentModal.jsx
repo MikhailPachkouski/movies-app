@@ -20,15 +20,11 @@ const style = {
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
-	// width: 400,
-	// bgcolor: 'background.paper',
-	// border: '2px solid #000',
 	boxShadow: 24,
 	p: 4,
 	width: '90%',
 	height: '80%',
 	backgroundColor: '#0b140f',
-	// border: '1px solid #282c34',
 	borderRadius: 5,
 	color: 'white',
 	padding: '10px',
@@ -44,7 +40,7 @@ export default function ContentModal({
 	movie,
 }) {
 	const [open, setOpen] = React.useState(false);
-	const {locale, typeContent} = useSelector(state=>state.movies);
+	const {locale} = useSelector(state=>state.movies);
 	const [dataMovie, setDataMovie] = React.useState();
 	const [dataVideo, setDataVideo] = React.useState();
 	const [dataRecommedation, setDataRecommedation] = React.useState();
@@ -56,13 +52,6 @@ export default function ContentModal({
 				// eslint-disable-next-line
 	}, []);
 	
-
-	const img_w500 = 'https://image.tmdb.org/t/p/w500';
-	const unavailableImage =
-		'https://www.movienewz.com/img/films/poster-holder.jpg';
-	const unavailableImageLandscape =
-		'https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg';
-
 	const handleOpen = () => {
 		setOpen(true);
 		fetchRecommedations();
@@ -71,18 +60,15 @@ export default function ContentModal({
 	const handleClose = () => setOpen(false);
 
 	const fetchData = async () => {
-		// type = typeContent===0 ? 'tv' : 'movie'
 		const { data } = await axios.get(
 			`https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
 		);
-			console.log(type);
 		setDataMovie(data);
 	};
 
 	const fetchRecommedations = async () => {
 		const { data } = await axios.get(
 			`https://api.themoviedb.org/3/${
-				// typeContent === 0 ? 'tv' : 'movie'
 				type
 			}/${id}/recommendations?api_key=${
 				process.env.REACT_APP_API_KEY
@@ -93,8 +79,6 @@ export default function ContentModal({
 	};
 
 	const fetchVideo = async () => {
-		// type = typeContent===0 ? 'tv' : 'movie'
-
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
     );
@@ -111,7 +95,6 @@ export default function ContentModal({
 		<>
 		
 			<div onClick={handleOpen} className='modal__wrapper'>
-				{/* </div> className='contentBlock'> */}
 				{children}
 			</div>
 			{dataMovie && 
@@ -136,8 +119,8 @@ export default function ContentModal({
 								<img
 									src={
 										dataMovie.poster_path
-											? `${img_w500}/${dataMovie.poster_path}`
-											: unavailableImage
+											? `${process.env.REACT_APP_IMG_W500}/${dataMovie.poster_path}`
+											: `${process.env.REACT_APP_IMG_UNAVAILABLE}`
 									}
 									alt={dataMovie.name || dataMovie.title}
 									className='movieModal__img__portrait'
@@ -145,8 +128,8 @@ export default function ContentModal({
 								<img
 									src={
 										dataMovie.backdrop_path
-											? `${img_w500}/${dataMovie.backdrop_path}`
-											: unavailableImageLandscape
+											? `${process.env.REACT_APP_IMG_W500}/${dataMovie.backdrop_path}`
+											: `${process.env.REACT_APP_IMG_UNAVAILABLE_LANDSCAPE}`
 									}
 									alt={dataMovie.name || dataMovie.title}
 									className='movieModal__img__landscape'
@@ -174,9 +157,6 @@ export default function ContentModal({
 										{dataMovie.name || dataMovie.title}
 									</Typography>
 									<i className='movieModal__tagline'>{dataMovie.tagline}</i>
-									{/* {dataMovie.tagline && (
-										<i className='movieModal__tagline'>{dataMovie.tagline}</i>
-									)} */}
 									<Box>
 										<p>
 											<span className='movieModal__text'>{locale==='ru-RU' ? 'Дата выхода:' : 'Release date:'}{' '}</span>
@@ -230,9 +210,6 @@ export default function ContentModal({
 							</div>
 						</Box>
 
-					{/* <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography> */}
 				</Fade>
 			</Modal>}
 		</>

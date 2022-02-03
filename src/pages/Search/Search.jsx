@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-	// Button,
-	// createTheme,
-	// Input,
 	Tab,
 	Tabs,
 	TextField,
@@ -10,7 +7,6 @@ import {
 import { makeStyles} from '@mui/styles';
 import { Box } from '@mui/system';
 import './Search.css';
-// import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	changeFavorites,
@@ -52,8 +48,6 @@ const Search = () => {
 			return true
 		} else return false
 	}
-
-	
 
 	const useStyles = makeStyles({
 		root: {

@@ -27,14 +27,6 @@ const MoviePage = () => {
 
 	const { type, id } = useParams();
 
-
-	const img_w500 = 'https://image.tmdb.org/t/p/w500';
-	const unavailableImage =
-		'https://www.movienewz.com/img/films/poster-holder.jpg';
-	const unavailableImageLandscape =
-		'https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg';
-
-
 	const checkFavorite = movie => {
 		if (favorites.some(el => el.id === movie?.id)) {
 			return true;
@@ -83,7 +75,6 @@ const MoviePage = () => {
 			fetchRecommedations();
 			fetchVideo();
 			dispatch(changeValueNavBar(5))
-			console.log(dataMovie);
 		}, []);
 
 	useEffect(() => {
@@ -112,8 +103,8 @@ const MoviePage = () => {
 						<img
 							src={
 								dataMovie.poster_path
-									? `${img_w500}/${dataMovie.poster_path}`
-									: unavailableImage
+									? `${process.env.REACT_APP_IMG_W500}/${dataMovie.poster_path}`
+									: `${process.env.REACT_APP_IMG_UNAVAILABLE}`
 							}
 							alt={dataMovie.name || dataMovie.title}
 							className='moviePage__img__portrait'
@@ -121,8 +112,8 @@ const MoviePage = () => {
 						<img
 							src={
 								dataMovie.backdrop_path
-									? `${img_w500}/${dataMovie.backdrop_path}`
-									: unavailableImageLandscape
+									? `${process.env.REACT_APP_IMG_W500}/${dataMovie.backdrop_path}`
+									: `${process.env.REACT_APP_IMG_UNAVAILABLE_LANDSCAPE}`
 							}
 							alt={dataMovie.name || dataMovie.title}
 							className='moviePage__img__landscape'
@@ -139,9 +130,6 @@ const MoviePage = () => {
 								{dataMovie.name || dataMovie.title}
 							</Typography>
 							<i className='movieModal__tagline'>{dataMovie.tagline}</i>
-							{/* {dataMovie.tagline && (
-										<i className='movieModal__tagline'>{dataMovie.tagline}</i>
-									)} */}
 							<Box>
 								<p>
 									<span className='movieModal__text'>
@@ -191,7 +179,6 @@ const MoviePage = () => {
 									</span>
 									{dataMovie ? (
 										<CarouselActors
-											//  type={typeContent===0 ? 'tv' : 'movie'}
 											type={type}
 											id={dataMovie.id}
 										/>

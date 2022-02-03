@@ -46,12 +46,11 @@ const Movies = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages))
-		console.log('movie content', content);
 	};
 
 	useEffect(() => {
 		genreUrl = selectedGenres.map((g) =>  g.id)?.join(',')
-	}, [page, selectedGenres])
+	}, [page, selectedGenres, locale])
 
 	useEffect(() => {
 		fetchMovies();
@@ -73,7 +72,6 @@ const Movies = () => {
 							poster={el.poster_path}
 							title={el.title}
 							date={el.release_date}
-							// media_type={el.media_type ? el.media_type : 'movie'}
 							media_type={'movie'}
 							vote={el.vote_average}
 							name={el.name}

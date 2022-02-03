@@ -33,7 +33,6 @@ export default function SimpleBottomNavigation() {
 
 	const classes = useStyles();
 	const {valueNavBar, locale} = useSelector(state=> state.movies)
-	// const [value, setValue] = React.useState(0);
 	const navigate = useNavigate()
 
 	const clearState = () => {
@@ -59,7 +58,6 @@ export default function SimpleBottomNavigation() {
 			navigate('/favorites')
 		} else if (valueNavBar === 4) {
 			navigate('/search')
-			// clearState()
 			dispatch(changeNumberOfPages(1));
 		dispatch(changePage(1))
 		dispatch(getGenres([]))
@@ -77,7 +75,6 @@ export default function SimpleBottomNavigation() {
 					window.scroll(0,0);
 					dispatch(changeValueNavBar(newValue))
 				}}
-				
 			>
 				<BottomNavigationAction
 					label={locale==='ru-RU' ? 'Тренды' : 'Trending'}

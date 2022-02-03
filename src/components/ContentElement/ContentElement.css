@@ -8,7 +8,6 @@
   background-color: #262726;
   border-radius: 10px;
   position: relative;
-  /* font-family: "Montserrat", sans-serif; */
 }
 
 .contentBlock:hover {
@@ -20,11 +19,6 @@
   .contentBlock {
     width: 46%;
   }
-  /* .contentBlock__poster {
-    width: 50%;
-
-  }
-	 */
 }
 
 .contentBlock__poster {
@@ -37,9 +31,13 @@
   height: 50px;
   text-align: center;
   font-size: 17px;
-  padding: 8px 0;
+  padding: 3px 0 7px 0;
   text-decoration: none;
   color: white;
+}
+
+.contentBlock__title:hover {
+  color: #121312;
 }
 
 .contentBlock__subtitle__wrapper {

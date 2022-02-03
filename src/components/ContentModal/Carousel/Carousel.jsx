@@ -13,9 +13,6 @@ import './Carousel.css';
 const handleDragStart = e => e.preventDefault();
 
 const Carousel = ({ dataRecommedation }) => {
-	const img_w300 = 'https://image.tmdb.org/t/p/w300';
-	const unavailableImage =
-		'https://www.movienewz.com/img/films/poster-holder.jpg';
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -33,7 +30,7 @@ const Carousel = ({ dataRecommedation }) => {
 				onClick={() => handleSearch(el)}
 				className='recommendationsItem__img'
 				src={
-					el.poster_path ? `${img_w300}/${el.poster_path}` : unavailableImage
+					el.poster_path ? `${process.env.REACT_APP_IMG_W300}/${el.poster_path}` : `${process.env.REACT_APP_IMG_UNAVAILABLE}`
 				}
 				alt={el.title || el.name}
 			/>
@@ -52,7 +49,6 @@ const Carousel = ({ dataRecommedation }) => {
 			items: 5,
 		},
 	};
-	// <img src="path-to-img" onDragStart={handleDragStart} />,
 
 	return (
 		<AliceCarousel

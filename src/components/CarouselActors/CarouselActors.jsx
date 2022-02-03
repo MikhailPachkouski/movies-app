@@ -12,15 +12,10 @@ const CarouselActors = ({ id, type }) => {
   const [actors, setActors] = useState([]);
 	const {locale} = useSelector(state=>state.movies);
 
-
-	const img_w300 = 'https://image.tmdb.org/t/p/w300';
-	const unavailableImage =
-		'https://www.movienewz.com/img/films/poster-holder.jpg';
-
   const items = actors.map((el) => (
     <div className="actorslItem">
       <img
-        src={el.profile_path ? `${img_w300}/${el.profile_path}` : unavailableImage}
+        src={el.profile_path ? `${process.env.REACT_APP_IMG_W300}/${el.profile_path}` : `${process.env.REACT_APP_IMG_UNAVAILABLE}`}
         alt={el?.name}
         onDragStart={handleDragStart}
         className="actorslItem__img"

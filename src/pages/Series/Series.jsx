@@ -16,11 +16,12 @@ const Series = () => {
 	const { content, page, selectedGenres, locale } = useSelector(
 		state => state.movies
 	);
-	let genreUrl = '';
 
 	const [favorites, setFavorites] = useState(
 		JSON.parse(localStorage.getItem('favorites')) || []
 	);
+
+	const [genreUrl, setGenreUrl] = useState('');
 
 	useEffect(() => {
 		localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -49,15 +50,16 @@ const Series = () => {
 		);
 		dispatch(fetchContent(data.results));
 		dispatch(changeNumberOfPages(data.total_pages));
-		console.log('series content', content);
 	};
 
 	useEffect(() => {
-		genreUrl = selectedGenres.map(g => g.id)?.join(',');
-	}, [page, selectedGenres]);
+		setGenreUrl(selectedGenres.map(g => g.id)?.join(','))
+		   // eslint-disable-next-line
+	}, [page, selectedGenres, locale]);
 
 	useEffect(() => {
 		fetchSeries();
+		   // eslint-disable-next-line
 	}, [page, selectedGenres, locale]);
 
 	return (

@@ -13,8 +13,6 @@ const Genres = () => {
 			`https://api.themoviedb.org/3/genre/${typeContent ? 'movie' : 'tv'}/list?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
 		);
 		dispatch(getGenres(data.genres));
-		console.log(data);
-
 	};
 
 	useEffect(() => {
