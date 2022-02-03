@@ -60,7 +60,7 @@ const Series = () => {
 	useEffect(() => {
 		fetchSeries();
 		   // eslint-disable-next-line
-	}, [page, selectedGenres, locale]);
+	}, [page, selectedGenres, locale, genreUrl]);
 
 	return (
 		<div>

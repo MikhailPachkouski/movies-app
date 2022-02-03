@@ -35,6 +35,9 @@ const moviesSlice = createSlice({
 				g => g.id !== action.payload.id
 			);
 		},
+		clearSelectedGenres(state, action) {
+			state.selectedGenres = []
+		},
 		changeFavorites(state, action) {
 			state.favorites = [...action.payload];
 		},
@@ -61,6 +64,7 @@ export const {
 	getGenres,
 	addSelectedGenres,
 	removeSelectedGenres,
+	clearSelectedGenres,
 	changeFavorites,
 	changeSearchText,
 	changeTypeContent,
