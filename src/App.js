@@ -14,7 +14,8 @@ import MoviePage from './pages/MoviePage/MoviePage';
 function App() {
 	return (
 		
-		<BrowserRouter basename='/movies-app-pmv'>
+		<BrowserRouter >
+		{/*basename='/movies-app-pmv'> */}
 			<Header />
 			<div className='App'>
 				<Container maxWidth='lg'>

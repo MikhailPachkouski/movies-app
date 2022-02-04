@@ -11,10 +11,9 @@ import { changeFavorites, changeNumberOfPages, fetchContent } from '../../redux/
 const Movies = () => {
 	const dispatch = useDispatch();
 	const { content, page, selectedGenres, locale } = useSelector(state => state.movies);
-	let genreUrl = '';
-
 
 	const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
+	const [genreUrl, setGenreUrl] = useState('');
 
 	useEffect(() => {
 		localStorage.setItem('favorites', JSON.stringify(favorites))
@@ -49,12 +48,13 @@ const Movies = () => {
 	};
 
 	useEffect(() => {
-		genreUrl = selectedGenres.map((g) =>  g.id)?.join(',')
+		setGenreUrl(selectedGenres.map(g => g.id)?.join(','))
 	}, [page, selectedGenres, locale])
 
 	useEffect(() => {
 		fetchMovies();
-	}, [page, selectedGenres, locale]);
+		   // eslint-disable-next-line
+	}, [page, selectedGenres, locale, genreUrl]);
 
 
 	return <div>
