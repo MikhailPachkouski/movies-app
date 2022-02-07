@@ -39,7 +39,7 @@ const Genres = () => {
 	return <div style={{marginTop: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
 	{selectedGenres && selectedGenres.map(genre => 
 	<Chip
-	style={{ margin: 2 }}
+	style={{ margin: 2, textTransform: 'capitalize' }}
   label={genre.name}
 	// variant="outlined"
 	clickable
@@ -51,7 +51,7 @@ const Genres = () => {
 />)}
 	{genres && genres.map(genre => 
 	<Chip
-	style={{ margin: 2 }}
+	style={{ margin: 2, textTransform: 'capitalize' }}
   label={genre.name}
 	// variant="outlined"
 	clickable

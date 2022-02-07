@@ -112,6 +112,10 @@
 	font-weight: bold;
 }
 
+.movieModal__text ~ span {
+	text-transform: capitalize
+}
+
 @media (min-width: 835px) {
 	.movieModal__img__landscape {
 		display: none;
