@@ -21,6 +21,7 @@ const Genres = () => {
 		return () => {
 			dispatch(getGenres([]))
 		}
+				// eslint-disable-next-line
 	}, [locale, typeContent]);
 
 	const handleClick = genre => {

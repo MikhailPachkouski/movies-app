@@ -75,6 +75,7 @@ const MoviePage = () => {
 			fetchRecommedations();
 			fetchVideo();
 			dispatch(changeValueNavBar(5))
+				// eslint-disable-next-line
 		}, []);
 
 	useEffect(() => {
