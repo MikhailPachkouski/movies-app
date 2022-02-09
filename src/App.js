@@ -9,6 +9,7 @@ import Favorites from './pages/Favorites/Favorites';
 import Trending from './pages/Trending/Trending';
 import Series from './pages/Series/Series';
 import MoviePage from './pages/MoviePage/MoviePage';
+import PersonPage from './pages/PersonPage/PersonPage';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Trending/>} exact />
 						<Route path='/:type/:id' element={<MoviePage/>}/>
+						<Route path='/person/:id' element={<PersonPage/>}/>
 						<Route path='/movies' element={<Movies/>} />
 						<Route path='/series' element={<Series/>} />
 						<Route path='/favorites' element={<Favorites/>} />

@@ -4,6 +4,7 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "./CarouselActors.css";
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 
 const handleDragStart = (e) => e.preventDefault();
@@ -13,6 +14,8 @@ const CarouselActors = ({ id, type }) => {
 	const {locale} = useSelector(state=>state.movies);
 
   const items = actors.map((el) => (
+    <>
+    <Link to={`/person/${el.id}`} style={{ textDecoration: 'none' }}>
     <div className="actorslItem">
       <img
         src={el.profile_path ? `${process.env.REACT_APP_IMG_W300}/${el.profile_path}` : `${process.env.REACT_APP_IMG_UNAVAILABLE}`}
@@ -22,6 +25,8 @@ const CarouselActors = ({ id, type }) => {
       />
       <p>{el?.name}</p>
     </div>
+    </Link>
+    </>
   ));
 
   const responsive = {
@@ -41,6 +46,7 @@ const CarouselActors = ({ id, type }) => {
       `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=${locale}`
     );
     setActors(data.cast);
+    console.log(data);
   };
 
   useEffect(() => {

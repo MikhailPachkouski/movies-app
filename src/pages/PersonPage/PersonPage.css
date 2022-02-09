@@ -1,0 +1,98 @@
+.personPage__about {
+	padding: 10px;
+	width: 85%;
+	height: 90%;
+	margin: 0 auto;
+	display: flex;
+
+	flex-direction: column;
+	font-family: 'Roboto', sans-serif;
+	justify-content: space-between;
+	font-weight: 300;
+}
+
+.personPage__info {
+	display: flex;
+	justify-content: space-around;
+	margin: 0 15px;
+}
+
+.personPage__description {
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+}
+
+.person__img__wrapper {
+	width: 45%;
+	display: flex;
+	justify-content: center;
+}
+
+.personPage__biography {
+	display: flex;
+	overflow-y: scroll;
+	padding: 15px;
+	border-radius: 20px;
+	scrollbar-width: thin;
+	box-shadow: inset 0 0 5px #4e4d4d;
+	text-align: justify;
+}
+
+@media (max-width: 800px) {
+	.person__img__wrapper {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.personPage__description {
+		width: 55%;
+	}
+}
+
+@media (max-width: 630px) {
+	.personPage__info {
+		flex-direction: column-reverse;
+	}
+
+	.personPage__description {
+		width: 100%;
+		align-items: center;
+		text-align: center;
+	}
+
+	.person__img__wrapper {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.personPage__biography {
+		font-size: smaller;
+	}
+}
+
+.personPage__img {
+	width: 60%;
+	border-radius: 5px;
+	margin-right: 0;
+}
+
+.personPage__text {
+	color: #00a048;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.personPage__text ~ a {
+	color: white;
+}
+
+.personPage__title {
+	height: 12%;
+	font-size: 6vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding-top: 15px;
+}
