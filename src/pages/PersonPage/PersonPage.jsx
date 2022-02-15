@@ -55,7 +55,7 @@ const PersonPage = () => {
 								component='h2'
 								className='personPage__title personPage__text'
 							>
-								{dataPerson.name}
+								{dataPerson?.name}
 							</Typography>
 						</div>
 

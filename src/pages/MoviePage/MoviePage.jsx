@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CarouselActors from '../../components/CarouselActors/CarouselActors';
 import Carousel from '../../components/ContentModal/Carousel/Carousel';
 import { changeFavorites, changeValueNavBar } from '../../redux/moviesSlice';
+import CarouselImg from "../../components/CarouselImg/CarouselImg";
 
 const MoviePage = () => {
 	const dispatch = useDispatch();
@@ -193,6 +194,21 @@ const MoviePage = () => {
 							<Box>
 								<p className='movieModal__description'>{dataMovie?.overview}</p>
 							</Box>
+
+							<div style={{ marginBottom: '10px' }}>
+								<span className='movieModal__text'>
+									{locale === 'ru-RU' ? 'Галерея: ' : 'Gallery: '}
+								</span>
+								{dataRecommedation?.results.length ? (
+									<CarouselImg type={type}
+												 id={dataMovie.id} />
+								) : (
+									<span>
+										{locale === 'ru-RU' ? 'отсутствуют.' : 'not found.'}
+									</span>
+								)}
+							</div>
+
 							<div style={{ marginBottom: '10px' }}>
 								<span className='movieModal__text'>
 									{locale === 'ru-RU' ? 'Рекомендации: ' : 'Recommendations: '}

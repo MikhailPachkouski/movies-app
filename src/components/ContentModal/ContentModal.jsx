@@ -14,6 +14,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useDispatch, useSelector } from 'react-redux';
 import CarouselActors from '../CarouselActors/CarouselActors';
 import { changeTypeContent } from '../../redux/moviesSlice';
+import CarouselImg from "../CarouselImg/CarouselImg";
 
 const style = {
 	position: 'absolute',
@@ -195,6 +196,19 @@ export default function ContentModal({
 											{dataMovie?.overview}
 										</p>
 									</Box>
+									<div style={{ marginBottom: '10px' }}>
+								<span className='movieModal__text'>
+									{locale === 'ru-RU' ? 'Галерея: ' : 'Gallery: '}
+								</span>
+										{dataRecommedation?.results.length ? (
+											<CarouselImg type={type}
+														 id={dataMovie.id} />
+										) : (
+											<span>
+										{locale === 'ru-RU' ? 'отсутствуют.' : 'not found.'}
+									</span>
+										)}
+									</div>
 									<div style={{marginBottom: '10px'}}>
 										<span className='movieModal__text'>{locale==='ru-RU' ? 'Рекомендации: ' : 'Recommendations: '}</span>
 										{dataRecommedation?.results.length ? <Carousel dataRecommedation={dataRecommedation?.results} /> : <span>{locale==='ru-RU' ? 'отсутствуют.' : 'not found.'}</span>}
