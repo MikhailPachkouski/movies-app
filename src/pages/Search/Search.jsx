@@ -24,6 +24,7 @@ const Search = () => {
 	
 	const { content, page, numberOfPages, searchText, typeContent, locale } = useSelector(state => state.movies);
 	const [type, setType] = useState(typeContent);
+	console.log(typeContent);
 	const dispatch = useDispatch();
 
 
@@ -104,14 +105,7 @@ const Search = () => {
 					}}
 					onChange={e => handleChange(e.target.value)}
 				/>
-				{/* <Button
-					// onClick={fetchSearch}
-					variant='contained'
-					color='success'
-					style={{ marginLeft: 10 }}
-				>
-					<SearchIcon fontSize='large' />
-				</Button> */}
+				
 			</div>
 			<Box fullWidth>
 				<Tabs
