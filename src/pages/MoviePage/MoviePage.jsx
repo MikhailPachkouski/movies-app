@@ -13,6 +13,8 @@ import CarouselActors from '../../components/CarouselActors/CarouselActors';
 import Carousel from '../../components/ContentModal/Carousel/Carousel';
 import { changeFavorites, changeValueNavBar } from '../../redux/moviesSlice';
 import CarouselImg from "../../components/CarouselImg/CarouselImg";
+import YouTube from 'react-youtube';
+import './MoviePage.css'
 
 const MoviePage = () => {
 	const dispatch = useDispatch();
@@ -69,6 +71,15 @@ const MoviePage = () => {
 	const handleBack = () => {
 		navigate(-1)
 	}
+
+	const opts = {
+		height: '100%',
+		width: '100%',
+		playerVars: {
+			// https://developers.google.com/youtube/player_parameters
+			autoplay: 0,
+		}
+	}
 	
 		useEffect(() => {
 			window.scroll(0, 0);
@@ -95,7 +106,10 @@ const MoviePage = () => {
 				// eslint-disable-next-line
 	}, [favorites])
 
-
+	// _onReady(event) {
+  //   // access to player in all event handlers via event.target
+  //   event.target.pauseVideo();
+  // }
 	return (
 		<>
 			{dataMovie && (
@@ -163,6 +177,7 @@ const MoviePage = () => {
 								>
 									{locale === 'ru-RU' ? 'Трейлер' : 'Watch the Trailer'}
 								</Button>
+								
 								{isFavorite ? (
 							<StarIcon
 								className='moviePage__star'
@@ -175,6 +190,9 @@ const MoviePage = () => {
 								onClick={() => handleClick(dataMovie)}
 							/>
 						)}
+						{dataVideo &&	<div className='youtube-video__wrapper'> 
+									<YouTube videoId={dataVideo} opts={opts}  />
+								</div>}
 								<div style={{ marginBottom: '10px', marginTop: '10px' }}>
 									<span className='movieModal__text'>
 										{locale === 'ru-RU' ? 'Актерский состав: ' : 'Starring: '}
@@ -234,6 +252,7 @@ const MoviePage = () => {
 			)}
 		</>
 	);
+
 };
 
 export default MoviePage;

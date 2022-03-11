@@ -24,7 +24,6 @@ const Search = () => {
 	
 	const { content, page, numberOfPages, searchText, typeContent, locale } = useSelector(state => state.movies);
 	const [type, setType] = useState(typeContent);
-	console.log(typeContent);
 	const dispatch = useDispatch();
 
 
@@ -105,7 +104,7 @@ const Search = () => {
 					}}
 					onChange={e => handleChange(e.target.value)}
 				/>
-				
+
 			</div>
 			<Box fullWidth>
 				<Tabs
