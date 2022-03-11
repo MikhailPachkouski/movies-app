@@ -1,3 +1,3 @@
-https://movie-base-pmv.herokuapp.com/
+https://movie-base-pmv.herokuapp.com/movies-app-pmv
 
 https://mikhailpachkouski.github.io/movies-app-pmv
