@@ -20,7 +20,6 @@ const ContentElement = ({
 	checkFavorite,
 	id,
 }) => {
-
 	const { favorites } = useSelector(state => state.movies);
 
 	const [isFavorite, setIsFavorite] = useState(false);
@@ -37,7 +36,17 @@ const ContentElement = ({
 					color={vote >= 7 ? 'success' : 'secondary'}
 					badgeContent={vote}
 				/>
-
+				<Link to={`/${media_type}/${id}`}>
+					<img
+						className='contentBlock__poster'
+						src={
+							poster
+								? `${process.env.REACT_APP_IMG_W300}${poster}`
+								: `${process.env.REACT_APP_IMG_UNAVAILABLE}`
+						}
+						alt={title}
+					/>
+				</Link>
 				<ContentModal
 					type={media_type}
 					id={id}
@@ -45,16 +54,19 @@ const ContentElement = ({
 					handleClick={handleClick}
 					movie={movie}
 				>
-					<img
+					{/* <img
 						className='contentBlock__poster'
 						src={poster ? `${process.env.REACT_APP_IMG_W300}${poster}` : `${process.env.REACT_APP_IMG_UNAVAILABLE}`}
 						alt={title}
-					/>
+					/> */}
+					<div className='contentBlock__title'>
+						<div className=''>{title || name}</div>
+					</div>
 				</ContentModal>
 
-				<Link to={`/${media_type}/${id}`} className='contentBlock__title'>
+				{/* <Link to={`/${media_type}/${id}`} className='contentBlock__title'>
 					<div className=''>{title || name}</div>
-				</Link>
+				</Link> */}
 				<div className='contentBlock__subtitle__wrapper'>
 					<span className='contentBlock__subTitle'>
 						{isFavorite ? (
