@@ -16,7 +16,8 @@ function App() {
 	return (
 		
 		<BrowserRouter
-				basename='/movies-app-pmv'>
+				// basename='/movies-app-pmv'
+				>
 			<Header />
 			<div className='App'>
 				<Container maxWidth='lg'>
